@@ -1,0 +1,59 @@
+A]
+1.create a mongodb clustor and a user
+2.connect the node with mongoose
+3.create user schema and register the user model
+
+B]
+1.create sign in and sign up routes
+2.auth.js
+    1.create router in seperate file using express.Router()
+    2.we can create get ,post routes.
+    3.Create a signUp router
+        1.It will be a post route
+        2.post data to database
+            1.add mongoose module and user model
+            2.check data is entered in mongodb
+            3.but password is visible to make it not visible install bcryptjs
+    4.create signin router
+        1.(JWT)if successfully signed in we should give user a token
+         so that he can access protected resources.It is possible
+         only if user comes with that unique token.
+        2.Create JWT
+            1.install jsonwebtoken
+            2.we need to create secret key as token with userId
+            3.generate token with the help of sign() by passing id and jwt_secret
+    5.create middleware to verify token
+        1.create requireLogin middleware 
+        2.we'll add authorization headers
+        3.if this authorization is not presesnt then we won't give access to user and send json response with 401 authorization failed
+        4.authorization will be "Bearer 'Token'(JWT Secret)"
+        5.Now verify this token with the JWT_SECRET token using jwt.verify(token.JWT_SECRET)
+        6.we'll get callback by err and payload
+        7.call next() to stop middleware and start next middleware
+        8. In auth.js import requireLogin model
+        9.create get router where requireLogin middleware will run and if authorized then only access is given to user
+C]
+create Instagram post schema and insta post route
+    1.create post model in Models folder
+    2.we need to build relationship between Post and User model
+    3.This is done by const { objectId } = mongoose.Schema.Types and
+    postedBy: {
+        type: objectId,
+        ref: "User"
+    }
+    4.create router for post now.
+    5.post req to create the post where user will send title and the body
+    6.save the post
+View all posts
+    1.create get router
+View only my post   
+    1.create get router
+
+D]Like and unlike routes are added.
+E]Build api for commenting
+F]Follow and unfollow
+    1.add followers and following in user model
+    2.Add put route to follow
+    3.There would be addition in both followers and following array when someone followes another one
+
+G]Create API for seeing posts of people whome u follow
